@@ -353,21 +353,15 @@ export default function Overview() {
                             {quickActions.map((action) => (
                                 <Button
                                     key={action.label}
-                                    variant={action.variant}
-                                    className="w-full justify-start gap-3 h-14 text-sm font-medium hover:scale-[1.02] transition-transform"
+                                    variant="ghost"
+                                    className="w-full justify-start gap-3 h-14 text-sm font-medium bg-muted/30 hover:bg-muted/50 border border-border/40 hover:border-primary/30 hover:shadow-md transition-all duration-300 group"
                                 >
-                                    <div className={`h-9 w-9 rounded-lg flex items-center justify-center ${
-                                        action.variant === 'default' ? 'bg-primary-foreground/20' : 'bg-primary/10'
-                                    }`}>
-                                        <action.icon className={`h-4 w-4 ${
-                                            action.variant === 'default' ? '' : 'text-primary'
-                                        }`} />
+                                    <div className="h-9 w-9 rounded-lg flex items-center justify-center bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                                        <action.icon className="h-4 w-4 text-primary" />
                                     </div>
                                     <div className="text-left">
-                                        <div>{action.label}</div>
-                                        <div className={`text-xs font-normal ${
-                                            action.variant === 'default' ? 'text-primary-foreground/70' : 'text-muted-foreground'
-                                        }`}>
+                                        <div className="text-foreground group-hover:text-primary transition-colors">{action.label}</div>
+                                        <div className="text-xs font-normal text-muted-foreground">
                                             {action.description}
                                         </div>
                                     </div>
