@@ -58,7 +58,7 @@ export default function Overview() {
             icon: Clock,
             description: "Optimisé",
             progress: 95,
-            bgGradient: "from-emerald-500/10 via-emerald-500/5 to-transparent"
+            bgGradient: "from-success/10 via-success/5 to-transparent"
         },
         {
             title: "Taux de Satisfaction",
@@ -151,25 +151,25 @@ export default function Overview() {
             label: "Services Cloud",
             status: "Opérationnel",
             icon: Globe,
-            statusColor: "bg-emerald-500"
+            statusColor: "bg-success"
         },
         {
             label: "API Gateway",
             status: "En ligne",
             icon: Zap,
-            statusColor: "bg-emerald-500"
+            statusColor: "bg-success"
         },
         {
             label: "Base de Données",
             status: "Connectée",
             icon: Database,
-            statusColor: "bg-emerald-500"
+            statusColor: "bg-success"
         },
         {
             label: "Réseau",
             status: "Stable",
             icon: Wifi,
-            statusColor: "bg-emerald-500"
+            statusColor: "bg-success"
         },
     ];
 
@@ -234,8 +234,8 @@ export default function Overview() {
                                 </div>
                                 <div className={`flex items-center gap-1 text-sm font-semibold px-2 py-1 rounded-lg ${
                                     stat.trend === 'up'
-                                        ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/10'
-                                        : 'text-rose-600 dark:text-rose-400 bg-rose-500/10'
+                                        ? 'text-success-foreground bg-success/20'
+                                        : 'text-destructive bg-destructive/10'
                                 }`}>
                                     {stat.trend === 'up' ? (
                                         <ArrowUpRight className="h-4 w-4" />
@@ -293,15 +293,15 @@ export default function Overview() {
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className={`p-2.5 rounded-xl transition-transform group-hover:scale-110 ${
-                                            activity.status === 'success' ? 'bg-emerald-500/10 dark:bg-emerald-500/20' :
+                                            activity.status === 'success' ? 'bg-success/10 dark:bg-success/20' :
                                                 activity.status === 'complete' ? 'bg-primary/10 dark:bg-primary/20' :
-                                                    activity.status === 'warning' ? 'bg-amber-500/10 dark:bg-amber-500/20' :
-                                                        'bg-blue-500/10 dark:bg-blue-500/20'
+                                                    activity.status === 'warning' ? 'bg-warning/10 dark:bg-warning/20' :
+                                                        'bg-accent/10 dark:bg-accent/20'
                                         }`}>
-                                            {activity.status === 'success' && <UserPlus className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />}
+                                            {activity.status === 'success' && <UserPlus className="h-4 w-4 text-success" />}
                                             {activity.status === 'complete' && <CheckCircle2 className="h-4 w-4 text-primary" />}
-                                            {activity.status === 'warning' && <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />}
-                                            {activity.status === 'info' && <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-400" />}
+                                            {activity.status === 'warning' && <AlertCircle className="h-4 w-4 text-warning" />}
+                                            {activity.status === 'info' && <Sparkles className="h-4 w-4 text-accent" />}
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-2">
@@ -374,8 +374,8 @@ export default function Overview() {
                     <Card className="border-border/40 overflow-hidden">
                         <CardHeader className="border-b border-border/30 bg-muted/20 dark:bg-muted/30 px-6 py-5">
                             <div className="flex items-center gap-3">
-                                <div className="h-9 w-9 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                                    <Shield className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                                <div className="h-9 w-9 rounded-lg bg-success/10 flex items-center justify-center">
+                                    <Shield className="h-4 w-4 text-success" />
                                 </div>
                                 <div>
                                     <CardTitle className="text-lg font-semibold text-foreground">
@@ -428,8 +428,8 @@ export default function Overview() {
                                 </CardDescription>
                             </div>
                         </div>
-                        <Badge variant="outline" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30">
-                            <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 mr-2 animate-pulse" />
+                        <Badge variant="outline" className="bg-success/10 text-success border-success/30">
+                            <div className="h-1.5 w-1.5 rounded-full bg-success mr-2 animate-pulse" />
                             Excellent
                         </Badge>
                     </div>
@@ -441,7 +441,7 @@ export default function Overview() {
                                 <div className="flex items-center justify-between">
                                     <span className="text-sm font-medium text-foreground">{metric.label}</span>
                                     <span className={`text-sm font-bold ${
-                                        metric.status === 'excellent' ? 'text-emerald-600 dark:text-emerald-400' : 'text-primary'
+                                        metric.status === 'excellent' ? 'text-success' : 'text-primary'
                                     }`}>
                     {metric.value}%
                   </span>
@@ -450,7 +450,7 @@ export default function Overview() {
                                     <div
                                         className={`absolute inset-y-0 left-0 rounded-full transition-all duration-1000 ${
                                             metric.status === 'excellent'
-                                                ? 'bg-gradient-to-r from-emerald-500 to-emerald-400'
+                                                ? 'bg-gradient-to-r from-success to-success/80'
                                                 : 'bg-gradient-to-r from-primary to-primary-light'
                                         }`}
                                         style={{ width: `${metric.value}%` }}
