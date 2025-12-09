@@ -45,16 +45,13 @@ const accentColors: { id: AccentColor; label: string; bgClass: string }[] = [
 function SettingsContent() {
     const [hasChanges, setHasChanges] = useState(false);
     const { accentColor, setAccentColor } = useTheme();
-    const [selectedColor, setSelectedColor] = useState<AccentColor>(accentColor);
 
     const handleSave = () => {
-        setAccentColor(selectedColor);
         toast.success("Settings saved successfully");
         setHasChanges(false);
     };
 
     const handleReset = () => {
-        setSelectedColor("teal");
         setAccentColor("teal");
         toast.info("Settings reset to defaults");
         setHasChanges(false);
@@ -65,8 +62,7 @@ function SettingsContent() {
     };
 
     const handleColorSelect = (color: AccentColor) => {
-        setSelectedColor(color);
-        markAsChanged();
+        setAccentColor(color);
     };
 
     return (
@@ -120,7 +116,7 @@ function SettingsContent() {
                 <TabsContent value="general" className="space-y-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <Card className="border-border/50 bg-card">
-                            <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                            <CardHeader className="border-b border-border/50 bg-muted">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/20">
                                         <Building2 className="h-5 w-5 text-primary" />
@@ -174,7 +170,7 @@ function SettingsContent() {
                         </Card>
 
                         <Card className="border-border/50 bg-card">
-                            <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                            <CardHeader className="border-b border-border/50 bg-muted">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20">
                                         <Globe className="h-5 w-5 text-accent" />
@@ -243,7 +239,7 @@ function SettingsContent() {
                     </div>
 
                     <Card className="border-border/50 bg-card">
-                        <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                        <CardHeader className="border-b border-border/50 bg-muted">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 rounded-lg bg-success/10 dark:bg-success/20">
                                     <Clock className="h-5 w-5 text-success" />
@@ -295,7 +291,7 @@ function SettingsContent() {
                 <TabsContent value="notifications" className="space-y-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <Card className="border-border/50 bg-card">
-                            <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                            <CardHeader className="border-b border-border/50 bg-muted">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/20">
                                         <Mail className="h-5 w-5 text-primary" />
@@ -339,7 +335,7 @@ function SettingsContent() {
                         </Card>
 
                         <Card className="border-border/50 bg-card">
-                            <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                            <CardHeader className="border-b border-border/50 bg-muted">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20">
                                         <Smartphone className="h-5 w-5 text-accent" />
@@ -384,7 +380,7 @@ function SettingsContent() {
                     </div>
 
                     <Card className="border-border/50 bg-card">
-                        <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                        <CardHeader className="border-b border-border/50 bg-muted">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 rounded-lg bg-warning/10 dark:bg-warning/20">
                                     <Bell className="h-5 w-5 text-warning" />
@@ -427,7 +423,7 @@ function SettingsContent() {
                 <TabsContent value="appearance" className="space-y-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <Card className="border-border/50 bg-card">
-                            <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                            <CardHeader className="border-b border-border/50 bg-muted">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/20">
                                         <Palette className="h-5 w-5 text-primary" />
@@ -461,7 +457,7 @@ function SettingsContent() {
                                                 key={color.id}
                                                 title={color.label}
                                                 className={`w-8 h-8 rounded-full ${color.bgClass} ring-2 ring-offset-2 ring-offset-background ${
-                                                    selectedColor === color.id
+                                                    accentColor === color.id
                                                         ? "ring-foreground scale-110"
                                                         : "ring-transparent hover:ring-muted-foreground/50"
                                                 } transition-all duration-200`}
@@ -470,14 +466,14 @@ function SettingsContent() {
                                         ))}
                                     </div>
                                     <p className="text-xs text-muted-foreground">
-                                        Selected: <span className="font-medium capitalize">{selectedColor}</span>
+                                        Selected: <span className="font-medium capitalize">{accentColor}</span>
                                     </p>
                                 </div>
                             </CardContent>
                         </Card>
 
                         <Card className="border-border/50 bg-card">
-                            <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                            <CardHeader className="border-b border-border/50 bg-muted">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20">
                                         <SettingsIcon className="h-5 w-5 text-accent" />
@@ -519,7 +515,7 @@ function SettingsContent() {
                 <TabsContent value="security" className="space-y-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <Card className="border-border/50 bg-card">
-                            <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                            <CardHeader className="border-b border-border/50 bg-muted">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-destructive/10 dark:bg-destructive/20">
                                         <Shield className="h-5 w-5 text-destructive" />
@@ -563,7 +559,7 @@ function SettingsContent() {
                         </Card>
 
                         <Card className="border-border/50 bg-card">
-                            <CardHeader className="border-b border-border/50 bg-secondary/30 dark:bg-secondary/50">
+                            <CardHeader className="border-b border-border/50 bg-muted">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-lg bg-success/10 dark:bg-success/20">
                                         <Database className="h-5 w-5 text-success" />

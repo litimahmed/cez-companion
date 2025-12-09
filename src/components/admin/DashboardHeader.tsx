@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Bell, Search, HelpCircle, Settings, LogOut, User, Loader2, Globe, Check, Sun, Moon, Monitor } from "lucide-react";
+import { Bell, Search, HelpCircle, Settings, LogOut, User, Loader2, Globe, Check, Sun, Moon, Monitor, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -15,14 +15,22 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useLogout } from "@/hooks/admin/useLogout";
 import { useProfile } from "@/hooks/admin/useProfile";
 import { useAdminTranslation } from "@/contexts/AdminTranslationContext";
-import { useTheme, ThemeMode } from "@/contexts/ThemeContext";
+import { useTheme, ThemeMode, AccentColor } from "@/contexts/ThemeContext";
+
+const accentColors: { id: AccentColor; label: string; color: string }[] = [
+    { id: "teal", label: "Teal", color: "hsl(182, 86%, 14%)" },
+    { id: "blue", label: "Blue", color: "hsl(217, 91%, 50%)" },
+    { id: "green", label: "Green", color: "hsl(142, 71%, 35%)" },
+    { id: "purple", label: "Purple", color: "hsl(271, 81%, 50%)" },
+    { id: "orange", label: "Orange", color: "hsl(25, 95%, 53%)" },
+];
 
 export function DashboardHeader() {
     const navigate = useNavigate();
     const { logout, isLoading: isLoggingOut } = useLogout();
     const { profile, isLoading: isLoadingProfile } = useProfile();
     const { t, language, setLanguage, isRTL } = useAdminTranslation();
-    const { themeMode, setThemeMode, isDark } = useTheme();
+    const { themeMode, setThemeMode, isDark, accentColor, setAccentColor } = useTheme();
 
     const getInitials = (name: string) => {
         return name
@@ -112,7 +120,47 @@ export function DashboardHeader() {
                     </DropdownMenuContent>
                 </DropdownMenu>
 
-                {/* Language Selector */}
+                {/* Color Palette Switcher */}
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-9 w-9 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all duration-200 relative"
+                        >
+                            <Palette className="h-[18px] w-[18px]" />
+                            <span 
+                                className="absolute bottom-1 right-1 h-2.5 w-2.5 rounded-full ring-2 ring-[hsl(var(--header-background))]"
+                                style={{ backgroundColor: accentColors.find(c => c.id === accentColor)?.color || accentColors[0].color }}
+                            />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-44 bg-popover border border-border">
+                        <DropdownMenuLabel className="text-xs text-muted-foreground">Accent Color</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <div className="p-2">
+                            <div className="flex gap-2 justify-center">
+                                {accentColors.map((color) => (
+                                    <button
+                                        key={color.id}
+                                        title={color.label}
+                                        onClick={() => setAccentColor(color.id)}
+                                        className={`w-7 h-7 rounded-full ring-2 ring-offset-2 ring-offset-popover transition-all duration-200 ${
+                                            accentColor === color.id
+                                                ? "ring-foreground scale-110"
+                                                : "ring-transparent hover:ring-muted-foreground/50"
+                                        }`}
+                                        style={{ backgroundColor: color.color }}
+                                    />
+                                ))}
+                            </div>
+                            <p className="text-xs text-muted-foreground text-center mt-2 capitalize">
+                                {accentColor}
+                            </p>
+                        </div>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button
